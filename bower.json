@@ -1,0 +1,30 @@
+{
+  "name": "angular-socializer",
+  "description": "social sharing for angular, now includes facebook and twitter.",
+  "main": "index.js",
+  "authors": [
+    "Amine Atallah"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "angular",
+    "facebook",
+    "twitter",
+    "sharing",
+    "socialsharing",
+    "social."
+  ],
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "angularjs#~1.4.7"
+  }
+}
