@@ -78,13 +78,14 @@ var angularSocializer;
             scope: {
                 shareUrl: '@',
                 title: '@',
-                accountName: '@'
+                twitterAccount: '@'
             },
             link: link
         };
         return directive;
         function link(scope, element, attrs) {
             var twitterAccount = attrs.twitterAccount || socializerConfig.twitterAccount;
+            console.log(twitterAccount);
             element.on('click', openSharer);
             var strWindowFeatures = 'width=600, height=400, left=100, top=100';
             var url = 'https://twitter.com/intent/tweet?url=' + attrs.shareUrl + '&text=' + attrs.title + '&via=' + twitterAccount + '&counturl=' + encodeURIComponent(attrs.countUrl);
