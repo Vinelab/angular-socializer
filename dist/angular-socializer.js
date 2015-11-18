@@ -9,7 +9,6 @@ var angularSocializer;
     var FacebookCount = (function () {
         function FacebookCount($http) {
             this.$http = $http;
-            console.log('const');
         }
         FacebookCount.prototype.getFacebookCount = function (url) {
             return this.$http({
@@ -135,7 +134,7 @@ var angularSocializer;
             console.log(twitterAccount);
             element.on('click', openSharer);
             var strWindowFeatures = 'width=600, height=400, left=100, top=100';
-            var url = 'https://twitter.com/intent/tweet?url=' + attrs.shareUrl + '&text=' + attrs.title + '&via=' + twitterAccount + '&counturl=' + encodeURIComponent(attrs.countUrl);
+            var url = 'https://twitter.com/intent/tweet?url=' + attrs.shareUrl + '&text=' + attrs.title + '&via=' + twitterAccount + '&counturl=' + encodeURIComponent(attrs.shareUrl);
             function openSharer() {
                 var popup = window.open(url, '', strWindowFeatures);
             }

@@ -2,11 +2,15 @@
 ((): void => {
   'use strict';
 
+  interface IMyAttributes extends ng.IAttributes {
+    shareUrl: string;
+  }
+
   angular.module('angularSocializer')
     .directive('facebookShare', facebookShare);
 
-   function facebookShare() {
-     var directive = {
+   function facebookShare(): ng.IDirective {
+     var directive = <ng.IDirective> {
        restrict: 'A',
        scope: {
          shareUrl: '@'
@@ -16,7 +20,7 @@
 
      return directive;
 
-     function link(scope, element, attrs) {
+     function link(scope: ng.IScope, element: ng.IAugmentedJQuery, attrs: IMyAttributes) {
 
        element.on('click', openSharer);
 
@@ -25,7 +29,7 @@
          FB.ui({
            method: 'share',
            href: attrs.shareUrl
-         }, (response) => {
+         }, (response: any) => {
 
            console.log(response);
 

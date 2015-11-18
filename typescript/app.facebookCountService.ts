@@ -6,11 +6,10 @@ module angularSocializer {
 
     static $inject = ['$http'];
 
-    constructor(public $http) {
-      console.log('const');
+    constructor(public $http: ng.IHttpService) {
     }
 
-    getFacebookCount(url: string) {
+    getFacebookCount(url: string): ng.IPromise<any> {
       return this.$http({
         method: "GET",
         url: "http://graph.facebook.com/?id=" + encodeURIComponent(url),
