@@ -1,7 +1,7 @@
 {
   "name": "angular-socializer",
   "description": "social sharing for angular, now includes facebook and twitter.",
-  "main": "index.js",
+  "main": "dist/angular-socializer.js",
   "authors": [
     "Amine Atallah"
   ],

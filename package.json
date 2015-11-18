@@ -2,7 +2,7 @@
   "name": "angular-socializer",
   "version": "0.0.1",
   "description": "social sharing for angular, now includes facebook and twitter.",
-  "main": "index.js",
+  "main": "dist/angular-socializer.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +15,9 @@
     "social."
   ],
   "author": "Amine Atallah",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-typescript": "^2.9.2"
+  }
 }
