@@ -3,6 +3,32 @@
     angular.module('angularSocializer', []);
 })();
 /// <reference path="../typings/angularjs/angular.d.ts" />
+var angularSocializer;
+(function (angularSocializer) {
+    'use strict';
+    var FacebookCount = (function () {
+        function FacebookCount($http) {
+            this.$http = $http;
+            console.log('const');
+        }
+        FacebookCount.prototype.getFacebookCount = function (url) {
+            return this.$http({
+                method: "GET",
+                url: "http://graph.facebook.com/?id=" + encodeURIComponent(url)
+            })
+                .then(function (response) {
+                return response.data;
+            }, function (reason) {
+                return reason;
+            });
+        };
+        FacebookCount.$inject = ['$http'];
+        return FacebookCount;
+    })();
+    angular.module('angularSocializer')
+        .service('facebookCount', FacebookCount);
+})(angularSocializer || (angularSocializer = {}));
+/// <reference path="../typings/angularjs/angular.d.ts" />
 (function () {
     'use strict';
     angular.module('angularSocializer')
