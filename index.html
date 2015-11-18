@@ -9,7 +9,8 @@
 	<div ng-controller="test">
 
   <span facebook-share share-url="http://www.cnn.com">facebook</span>
-  <span twitter-share share-url="http://www.google.con">tweet</span>
+  <span twitter-share share-url="http://www.google.con">tweet with global account name</span>
+  <span twitter-share share-url="http://www.google.con" twitter-account="directiveAccount">tweet with account name changed in the directive</span>
 
   </div>
 	<script src="components/angular/angular.js"></script>
