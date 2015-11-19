@@ -48,10 +48,14 @@ No configuration is needed to run the module, however if you want to use the fac
 
 #### example
 ```javascript
-  //configure facebook appId
+  //configure facebook 
   angular.module('yourApp', ['angularSocializer'])
     .config(function(socializerConfigProvider){
-      socializerConfigProvider.setFacebookAppId('facebook-app-id');
+      socializerConfigProvider.setFacebookConfig({
+        appId: 'your-app-id',
+        xfbml: false,
+        version: 'v2.5'
+      });
   });
 
 ```
