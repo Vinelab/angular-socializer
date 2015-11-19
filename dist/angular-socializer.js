@@ -123,18 +123,22 @@ var angularSocializer;
             restrict: 'A',
             scope: {
                 shareUrl: '@',
-                title: '@',
-                twitterAccount: '@'
+                text: '@',
+                twitterAccount: '@',
+                hashtags: '@'
             },
             link: link
         };
         return directive;
         function link(scope, element, attrs) {
+            console.log(attrs);
             var twitterAccount = attrs.twitterAccount || socializerConfig.twitterAccount;
+            var text = attrs.text || '';
+            var hashtags = attrs.hashtags || '';
             console.log(twitterAccount);
             element.on('click', openSharer);
             var strWindowFeatures = 'width=600, height=400, left=100, top=100';
-            var url = 'https://twitter.com/intent/tweet?url=' + attrs.shareUrl + '&text=' + attrs.title + '&via=' + twitterAccount + '&counturl=' + encodeURIComponent(attrs.shareUrl);
+            var url = 'https://twitter.com/intent/tweet?url=' + attrs.shareUrl + '&text=' + text + '&via=' + twitterAccount + '&hashtags=' + hashtags + '&counturl=' + encodeURIComponent(attrs.shareUrl);
             function openSharer() {
                 var popup = window.open(url, '', strWindowFeatures);
             }
