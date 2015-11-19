@@ -5,20 +5,20 @@ module angularSocializer {
 
   class SocializerConfig {
 
-    private facebookAppId: string;
+    private facebookConfig: Object;
     private twitterAccount: string;
 
     constructor() {}
 
     public $get() {
         return {
-            facebookAppId: this.facebookAppId,
+            facebookConfig: this.facebookConfig,
             twitterAccount: this.twitterAccount
         };
     }
 
-    public setFacebookAppId(appId: string) {
-        this.facebookAppId = appId;
+    public setFacebookConfig(config: Object) {
+        this.facebookConfig = config;
     }
 
     public setTwitterAccount(twitterAccount: string) {

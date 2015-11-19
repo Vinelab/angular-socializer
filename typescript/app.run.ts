@@ -6,11 +6,7 @@
 
   function runner(socializerConfig) {
     window.fbAsyncInit = function() {
-      FB.init({
-        appId: socializerConfig.facebookAppId,
-        xfbml: false,
-        version: 'v2.5'
-      });
+      FB.init(socializerConfig.facebookConfig);
     };
   }
 })();

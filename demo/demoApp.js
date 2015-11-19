@@ -1,7 +1,13 @@
 (function(){
   angular.module('sharingApp', ['angularSocializer'])
   .config(function(socializerConfigProvider){
-    socializerConfigProvider.setFacebookAppId('947260665329944');
+
+    socializerConfigProvider.setFacebookConfig({
+      appId: '947260665329944',
+      xfbml: false,
+      version: 'v2.5'
+    });
+
     socializerConfigProvider.setTwitterAccount('globalName');
   })
   .controller('test', function(facebookCount, tweetCount){

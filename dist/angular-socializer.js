@@ -63,12 +63,12 @@ var angularSocializer;
         }
         SocializerConfig.prototype.$get = function () {
             return {
-                facebookAppId: this.facebookAppId,
+                facebookConfig: this.facebookConfig,
                 twitterAccount: this.twitterAccount
             };
         };
-        SocializerConfig.prototype.setFacebookAppId = function (appId) {
-            this.facebookAppId = appId;
+        SocializerConfig.prototype.setFacebookConfig = function (config) {
+            this.facebookConfig = config;
         };
         SocializerConfig.prototype.setTwitterAccount = function (twitterAccount) {
             this.twitterAccount = twitterAccount;
@@ -84,11 +84,7 @@ var angularSocializer;
         .run(runner);
     function runner(socializerConfig) {
         window.fbAsyncInit = function () {
-            FB.init({
-                appId: socializerConfig.facebookAppId,
-                xfbml: false,
-                version: 'v2.5'
-            });
+            FB.init(socializerConfig.facebookConfig);
         };
     }
 })();
