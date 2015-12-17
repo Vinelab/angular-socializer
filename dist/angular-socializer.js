@@ -89,6 +89,62 @@ var angularSocializer;
     }
 })();
 /// <reference path="../typings/angularjs/angular.d.ts" />
+var angularSocializer;
+(function (angularSocializer) {
+    'use strict';
+    var SocialRenderer = (function () {
+        function SocialRenderer($timeout) {
+            this.$timeout = $timeout;
+        }
+        SocialRenderer.prototype.renderFacebook = function (delay) {
+            this.$timeout(function () {
+                if (window.FB) {
+                    window.FB.XFBML.parse();
+                }
+                else {
+                    (function (d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) {
+                            return;
+                        }
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = "//connect.facebook.net/en_US/sdk.js";
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));
+                }
+            }, delay || 0);
+        };
+        SocialRenderer.prototype.renderTwitter = function (delay) {
+            this.$timeout(function () {
+                if (window.twttr) {
+                    window.twttr.widgets.load();
+                }
+                else {
+                    window.twttr = (function (d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0], t = window.twttr || {};
+                        if (d.getElementById(id))
+                            return t;
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = "https://platform.twitter.com/widgets.js";
+                        fjs.parentNode.insertBefore(js, fjs);
+                        t._e = [];
+                        t.ready = function (f) {
+                            t._e.push(f);
+                        };
+                        return t;
+                    }(document, 'script', 'twitter-wjs'));
+                }
+            }, delay || 0);
+        };
+        SocialRenderer.$inject = ['$timeout'];
+        return SocialRenderer;
+    })();
+    angular.module('angularSocializer')
+        .service('socialRenderer', SocialRenderer);
+})(angularSocializer || (angularSocializer = {}));
+/// <reference path="../typings/angularjs/angular.d.ts" />
 (function () {
     'use strict';
     angular.module('angularSocializer')
