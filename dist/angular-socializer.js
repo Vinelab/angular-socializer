@@ -89,27 +89,6 @@ var angularSocializer;
     }
 })();
 /// <reference path="../typings/angularjs/angular.d.ts" />
-var angularSocializer;
-(function (angularSocializer) {
-    'use strict';
-    var TweetCount = (function () {
-        function TweetCount($http) {
-            this.$http = $http;
-        }
-        TweetCount.prototype.getTweetCount = function (url) {
-            return this.$http.jsonp("http://cdn.api.twitter.com/1/urls/count.json?callback=JSON_CALLBACK&url=" + encodeURIComponent(url))
-                .then(function (response) {
-                return response.data;
-            }, function (reason) {
-                return reason;
-            });
-        };
-        return TweetCount;
-    })();
-    angular.module('angularSocializer')
-        .service('tweetCount', TweetCount);
-})(angularSocializer || (angularSocializer = {}));
-/// <reference path="../typings/angularjs/angular.d.ts" />
 (function () {
     'use strict';
     angular.module('angularSocializer')

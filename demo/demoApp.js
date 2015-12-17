@@ -15,11 +15,5 @@
       .then(function(response) {
         console.log(response);
       });
-
-    tweetCount.getTweetCount('http://instagram.com')
-    .then(function(response) {
-      console.log(response);
-    });
-
   });
 })();
