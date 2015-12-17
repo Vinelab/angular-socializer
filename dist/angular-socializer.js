@@ -92,22 +92,57 @@ var angularSocializer;
 var angularSocializer;
 (function (angularSocializer) {
     'use strict';
-    var TweetCount = (function () {
-        function TweetCount($http) {
-            this.$http = $http;
+    var SocialRenderer = (function () {
+        function SocialRenderer($timeout) {
+            this.$timeout = $timeout;
         }
-        TweetCount.prototype.getTweetCount = function (url) {
-            return this.$http.jsonp("http://cdn.api.twitter.com/1/urls/count.json?callback=JSON_CALLBACK&url=" + encodeURIComponent(url))
-                .then(function (response) {
-                return response.data;
-            }, function (reason) {
-                return reason;
-            });
+        SocialRenderer.prototype.renderFacebook = function (delay) {
+            this.$timeout(function () {
+                if (window.FB) {
+                    window.FB.XFBML.parse();
+                }
+                else {
+                    (function (d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) {
+                            return;
+                        }
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = "//connect.facebook.net/en_US/sdk.js";
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));
+                }
+            }, delay || 0);
         };
-        return TweetCount;
+        SocialRenderer.prototype.renderTwitter = function (delay) {
+            this.$timeout(function () {
+                if (window.twttr) {
+                    window.twttr.widgets.load();
+                }
+                else {
+                    window.twttr = (function (d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0], t = window.twttr || {};
+                        if (d.getElementById(id))
+                            return t;
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = "https://platform.twitter.com/widgets.js";
+                        fjs.parentNode.insertBefore(js, fjs);
+                        t._e = [];
+                        t.ready = function (f) {
+                            t._e.push(f);
+                        };
+                        return t;
+                    }(document, 'script', 'twitter-wjs'));
+                }
+            }, delay || 0);
+        };
+        SocialRenderer.$inject = ['$timeout'];
+        return SocialRenderer;
     })();
     angular.module('angularSocializer')
-        .service('tweetCount', TweetCount);
+        .service('socialRenderer', SocialRenderer);
 })(angularSocializer || (angularSocializer = {}));
 /// <reference path="../typings/angularjs/angular.d.ts" />
 (function () {
