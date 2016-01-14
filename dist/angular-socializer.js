@@ -13,7 +13,7 @@ var angularSocializer;
         FacebookCount.prototype.getFacebookCount = function (url) {
             return this.$http({
                 method: "GET",
-                url: "http://graph.facebook.com/?id=" + encodeURIComponent(url)
+                url: "//graph.facebook.com/?id=" + encodeURIComponent(url)
             })
                 .then(function (response) {
                 return response.data;

@@ -12,7 +12,7 @@ module angularSocializer {
     getFacebookCount(url: string): ng.IPromise<any> {
       return this.$http({
         method: "GET",
-        url: "http://graph.facebook.com/?id=" + encodeURIComponent(url),
+        url: "//graph.facebook.com/?id=" + encodeURIComponent(url)
       })
       .then((response) => {
         return response.data;
