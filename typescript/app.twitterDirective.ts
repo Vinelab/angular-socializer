@@ -12,6 +12,7 @@
   angular.module('angularSocializer')
     .directive('twitterShare', twitterShare);
 
+  twitterShare.$inject = ['socializerConfig'];
   function twitterShare(socializerConfig): ng.IDirective {
     var directive = <ng.IDirective> {
       restrict: 'A',
