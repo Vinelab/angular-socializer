@@ -4,6 +4,7 @@
 
   interface IMyAttributes extends ng.IAttributes {
     shareUrl: string;
+    imageUrl: string;
   }
 
   angular.module('angularSocializer')
@@ -13,7 +14,8 @@
      var directive = <ng.IDirective> {
        restrict: 'A',
        scope: {
-         shareUrl: '@'
+         shareUrl: '@',
+         imageUrl: '@'
        },
        link: link
      };
@@ -28,6 +30,7 @@
 
          FB.ui({
            method: 'share',
+           picture: attrs.imageUrl,
            href: attrs.shareUrl
          }, (response: any) => {
 

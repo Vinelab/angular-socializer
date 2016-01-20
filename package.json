@@ -1,6 +1,6 @@
 {
   "name": "angular-socializer",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "social sharing for angular, now includes facebook and twitter.",
   "main": "dist/angular-socializer.js",
   "scripts": {

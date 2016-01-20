@@ -36,7 +36,8 @@ var angularSocializer;
         var directive = {
             restrict: 'A',
             scope: {
-                shareUrl: '@'
+                shareUrl: '@',
+                imageUrl: '@'
             },
             link: link
         };
@@ -46,6 +47,7 @@ var angularSocializer;
             function openSharer() {
                 FB.ui({
                     method: 'share',
+                    picture: attrs.imageUrl,
                     href: attrs.shareUrl
                 }, function (response) {
                     console.log(response);
