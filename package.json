@@ -1,23 +1,23 @@
 {
-  "name": "angular-socializer",
-  "version": "0.0.7",
-  "description": "social sharing for angular, now includes facebook and twitter.",
-  "main": "dist/angular-socializer.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "angular",
-    "facebook",
-    "twitter",
-    "sharing",
-    "socialsharing",
-    "social."
-  ],
-  "author": "Amine Atallah",
-  "license": "ISC",
-  "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-typescript": "^2.9.2"
-  }
+    "name": "angular-socializer",
+    "version": "0.0.8",
+    "description": "social sharing for angular, now includes facebook and twitter.",
+    "main": "dist/angular-socializer.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "angular",
+        "facebook",
+        "twitter",
+        "sharing",
+        "socialsharing",
+        "social."
+    ],
+    "author": "Amine Atallah",
+    "license": "ISC",
+    "devDependencies": {
+        "gulp": "^3.9.0",
+        "gulp-typescript": "^2.9.2"
+    }
 }
