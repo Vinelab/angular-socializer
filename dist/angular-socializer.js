@@ -90,7 +90,6 @@ var angularSocializer;
     function runner(socializerConfig, $window, $rootScope) {
         $rootScope.$on("fb.init.ready", function() {
             $window.FB.init(socializerConfig.facebookConfig);
-            console.log("fb.init.ready");
         });
     }
 })();

@@ -7,7 +7,6 @@
         
 		$rootScope.$on("fb.init.ready", () => {
 			$window.FB.init(socializerConfig.facebookConfig);
-			console.log("fb.init.ready");
 		});
 	}
 })();
