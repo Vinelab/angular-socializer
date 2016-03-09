@@ -1,25 +1,25 @@
 /// <reference path="../typings/angularjs/angular.d.ts" />
-(function () {
+(function() {
     angular.module('angularSocializer', []);
 })();
 /// <reference path="../typings/angularjs/angular.d.ts" />
 var angularSocializer;
-(function (angularSocializer) {
+(function(angularSocializer) {
     'use strict';
-    var FacebookCount = (function () {
+    var FacebookCount = (function() {
         function FacebookCount($http) {
             this.$http = $http;
         }
-        FacebookCount.prototype.getFacebookCount = function (url) {
+        FacebookCount.prototype.getFacebookCount = function(url) {
             return this.$http({
-                method: "GET",
-                url: "//graph.facebook.com/?id=" + encodeURIComponent(url)
-            })
-                .then(function (response) {
-                return response.data;
-            }, function (reason) {
-                return reason;
-            });
+                    method: "GET",
+                    url: "//graph.facebook.com/?id=" + encodeURIComponent(url)
+                })
+                .then(function(response) {
+                    return response.data;
+                }, function(reason) {
+                    return reason;
+                });
         };
         FacebookCount.$inject = ['$http'];
         return FacebookCount;
@@ -28,51 +28,53 @@ var angularSocializer;
         .service('facebookCount', FacebookCount);
 })(angularSocializer || (angularSocializer = {}));
 /// <reference path="../typings/angularjs/angular.d.ts" />
-(function () {
+(function() {
     'use strict';
-    angular.module('angularSocializer')
-        .directive('facebookShare', facebookShare);
-    function facebookShare() {
-        var directive = {
-            restrict: 'A',
-            scope: {
-                shareUrl: '@',
-                imageUrl: '@'
-            },
-            link: link
-        };
-        return directive;
-        function link(scope, element, attrs) {
-            element.on('click', openSharer);
-            function openSharer() {
-                FB.ui({
-                    method: 'share',
-                    picture: attrs.imageUrl,
-                    href: attrs.shareUrl
-                }, function (response) {
-                    console.log(response);
-                });
-            }
+});
+angular.module('angularSocializer')
+    .directive('facebookShare', facebookShare);
+
+function facebookShare() {
+    var directive = {
+        restrict: 'A',
+        scope: {
+            shareUrl: '@',
+            imageUrl: '@'
+        },
+        link: link
+    };
+    return directive;
+
+    function link(scope, element, attrs) {
+        element.on('click', openSharer);
+
+        function openSharer() {
+            FB.ui({
+                method: 'share',
+                picture: attrs.imageUrl,
+                href: attrs.shareUrl
+            }, function(response) {
+                console.log(response);
+            });
         }
     }
-})();
+};
 /// <reference path="../typings/angularjs/angular.d.ts" />
 var angularSocializer;
-(function (angularSocializer) {
+(function(angularSocializer) {
     'use strict';
-    var SocializerConfig = (function () {
-        function SocializerConfig() {
-        }
-        SocializerConfig.prototype.$get = function () {
+    var SocializerConfig = (function() {
+        function SocializerConfig() {}
+        SocializerConfig.prototype.$get = function() {
             return {
                 facebookConfig: this.facebookConfig,
                 twitterAccount: this.twitterAccount
             };
         };
-        SocializerConfig.prototype.setFacebookConfig = function (config) {
+        SocializerConfig.prototype.setFacebookConfig = function(config) {
             this.facebookConfig = config;
         };
-        SocializerConfig.prototype.setTwitterAccount = function (twitterAccount) {
+        SocializerConfig.prototype.setTwitterAccount = function(twitterAccount) {
             this.twitterAccount = twitterAccount;
         };
         return SocializerConfig;
@@ -81,31 +83,31 @@ var angularSocializer;
         .provider('socializerConfig', SocializerConfig);
 })(angularSocializer || (angularSocializer = {}));
 /// <reference path="../typings/angularjs/angular.d.ts" />
-(function () {
-    angular.module('angularSocializer')
-        .run(runner);
-    runner.$inject = ['socializerConfig'];
-    function runner(socializerConfig) {
-        window.fbAsyncInit = function () {
-            FB.init(socializerConfig.facebookConfig);
-        };
+(function() {
+    angular.module('angularSocializer').run(runner);
+    runner.$inject = ["socializerConfig", "$window", "$rootScope"];
+
+    function runner(socializerConfig, $window, $rootScope) {
+        $rootScope.$on("fb.init.ready", function() {
+            $window.FB.init(socializerConfig.facebookConfig);
+            console.log("fb.init.ready");
+        });
     }
 })();
 /// <reference path="../typings/angularjs/angular.d.ts" />
 var angularSocializer;
-(function (angularSocializer) {
+(function(angularSocializer) {
     'use strict';
-    var SocialRenderer = (function () {
+    var SocialRenderer = (function() {
         function SocialRenderer($timeout) {
             this.$timeout = $timeout;
         }
-        SocialRenderer.prototype.renderFacebook = function (delay) {
-            this.$timeout(function () {
+        SocialRenderer.prototype.renderFacebook = function(delay) {
+            this.$timeout(function() {
                 if (window.FB) {
                     window.FB.XFBML.parse();
-                }
-                else {
-                    (function (d, s, id) {
+                } else {
+                    (function(d, s, id) {
                         var js, fjs = d.getElementsByTagName(s)[0];
                         if (d.getElementById(id)) {
                             return;
@@ -118,14 +120,14 @@ var angularSocializer;
                 }
             }, delay || 0);
         };
-        SocialRenderer.prototype.renderTwitter = function (delay) {
-            this.$timeout(function () {
+        SocialRenderer.prototype.renderTwitter = function(delay) {
+            this.$timeout(function() {
                 if (window.twttr) {
                     window.twttr.widgets.load();
-                }
-                else {
-                    window.twttr = (function (d, s, id) {
-                        var js, fjs = d.getElementsByTagName(s)[0], t = window.twttr || {};
+                } else {
+                    window.twttr = (function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0],
+                            t = window.twttr || {};
                         if (d.getElementById(id))
                             return t;
                         js = d.createElement(s);
@@ -133,7 +135,7 @@ var angularSocializer;
                         js.src = "https://platform.twitter.com/widgets.js";
                         fjs.parentNode.insertBefore(js, fjs);
                         t._e = [];
-                        t.ready = function (f) {
+                        t.ready = function(f) {
                             t._e.push(f);
                         };
                         return t;
@@ -148,33 +150,36 @@ var angularSocializer;
         .service('socialRenderer', SocialRenderer);
 })(angularSocializer || (angularSocializer = {}));
 /// <reference path="../typings/angularjs/angular.d.ts" />
-(function () {
+(function() {
     'use strict';
-    angular.module('angularSocializer')
-        .directive('twitterShare', twitterShare);
-    twitterShare.$inject = ['socializerConfig'];
-    function twitterShare(socializerConfig) {
-        var directive = {
-            restrict: 'A',
-            scope: {
-                shareUrl: '@',
-                text: '@',
-                twitterAccount: '@',
-                hashtags: '@'
-            },
-            link: link
-        };
-        return directive;
-        function link(scope, element, attrs) {
-            var twitterAccount = attrs.twitterAccount || socializerConfig.twitterAccount;
-            var text = attrs.text || '';
-            var hashtags = attrs.hashtags || '';
-            element.on('click', openSharer);
-            var strWindowFeatures = 'width=600, height=400, left=100, top=100';
-            var url = 'https://twitter.com/intent/tweet?url=' + attrs.shareUrl + '&text=' + text + '&via=' + twitterAccount + '&hashtags=' + hashtags;
-            function openSharer() {
-                var popup = window.open(url, '', strWindowFeatures);
-            }
+});
+angular.module('angularSocializer')
+    .directive('twitterShare', twitterShare);
+twitterShare.$inject = ['socializerConfig'];
+
+function twitterShare(socializerConfig) {
+    var directive = {
+        restrict: 'A',
+        scope: {
+            shareUrl: '@',
+            text: '@',
+            twitterAccount: '@',
+            hashtags: '@'
+        },
+        link: link
+    };
+    return directive;
+
+    function link(scope, element, attrs) {
+        var twitterAccount = attrs.twitterAccount || socializerConfig.twitterAccount;
+        var text = attrs.text || '';
+        var hashtags = attrs.hashtags || '';
+        element.on('click', openSharer);
+        var strWindowFeatures = 'width=600, height=400, left=100, top=100';
+        var url = 'https://twitter.com/intent/tweet?url=' + attrs.shareUrl + '&text=' + text + '&via=' + twitterAccount + '&hashtags=' + hashtags;
+
+        function openSharer() {
+            var popup = window.open(url, '', strWindowFeatures);
         }
     }
-})();
+};

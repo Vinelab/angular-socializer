@@ -1,13 +1,13 @@
 /// <reference path="../typings/angularjs/angular.d.ts" />
 ((): void => {
+	angular.module('angularSocializer').run(runner);
 
-  angular.module('angularSocializer')
-    .run(runner);
-
-  runner.$inject = ['socializerConfig'];
-  function runner(socializerConfig) {
-    window.fbAsyncInit = function() {
-      FB.init(socializerConfig.facebookConfig);
-    };
-  }
+	runner.$inject = ["socializerConfig", "$window", "$rootScope"];
+	function runner(socializerConfig, $window, $rootScope) {
+        
+		$rootScope.$on("fb.init.ready", () => {
+			$window.FB.init(socializerConfig.facebookConfig);
+			console.log("fb.init.ready");
+		});
+	}
 })();
